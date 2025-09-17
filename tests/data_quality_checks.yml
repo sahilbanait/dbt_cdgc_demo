@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: dim_customers
+    tests:
+      - unique:
+          column_name: customer_id
+      - not_null:
+          column_name: customer_id
+    columns:
+      - name: email
+        tests:
+          - not_null
+          - unique
+
+  - name: fact_transactions
+    tests:
+      - unique:
+          column_name: transaction_id
+      - not_null:
+          column_name: transaction_id
+    columns:
+      - name: amount
+        tests:
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+
+  - name: customer_360_view
+    tests:
+      - unique:
+          column_name: customer_id
+    columns:
+      - name: gdpr_consent
+        tests:
+          - accepted_values:
+              values: [true, false]

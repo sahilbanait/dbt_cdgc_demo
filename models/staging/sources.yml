@@ -1,0 +1,14 @@
+
+version: 2
+sources:
+    - name: finance
+      database: DEV_RAW_DB
+      schema: FINANCE
+      tables:
+          - name: ACCOUNT_INFORMATION
+          - name: FINANCIAL_TRANSACTIONS
+    - name: customer
+      database: DEV_RAW_DB
+      schema: CUSTOMERS
+      tables:
+          - name: CUSTOMERS_MASTER
